@@ -2,10 +2,9 @@ using System;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Easy_Request_log.data;
 using Easy_Request_log.data.entity;
+using Easy_Request_log.Service.RequestLogger;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 
 namespace Easy_Request_log.Middleware
 {
@@ -19,7 +18,7 @@ namespace Easy_Request_log.Middleware
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, RequestLoggerDbContext requestLoggerDbContext)
+        public async Task Invoke(HttpContext context, IRequestLoggerService requestLoggerService)
         {
             var requestLog = new RequestLog()
             {
@@ -27,7 +26,8 @@ namespace Easy_Request_log.Middleware
                 Username = context.User.Identity.Name
             };
 
-            context.Request.EnableRewind();
+            context.Request.EnableBuffering();
+            ;
             var buffer = new byte[Convert.ToInt32(context.Request.ContentLength)];
             await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
             var bodyAsText = Encoding.UTF8.GetString(buffer);
@@ -42,8 +42,7 @@ namespace Easy_Request_log.Middleware
 
             requestLog.StatusCode = (HttpStatusCode) context.Response.StatusCode;
 
-            requestLoggerDbContext.Add(requestLog);
-            await requestLoggerDbContext.SaveChangesAsync();
+            requestLoggerService.Log(requestLog);
         }
     }
 }
