@@ -5,6 +5,7 @@ using System.Net;
 using Easy_Request_log.Service.RequestLogger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Easy_Request_log.data.entity;
 
 namespace demo.Controllers
 {
@@ -23,10 +24,9 @@ namespace demo.Controllers
 
 
         [HttpGet]
-        public IEnumerable<HttpStatusCode> Get()
+        public IEnumerable<RequestLog> Get()
         {
-            return _requestLoggerService.Find(z => !string.IsNullOrEmpty(z.Path))
-                .ToList().Select(z=>z.StatusCode);
+            return _requestLoggerService.Find();
         }
     }
 }

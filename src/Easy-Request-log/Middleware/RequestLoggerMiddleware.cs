@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Easy_Request_log.Middleware
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class RequestLoggerMiddleware
     {
         private readonly RequestDelegate _next;
@@ -18,7 +17,8 @@ namespace Easy_Request_log.Middleware
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IRequestLoggerService requestLoggerService)
+        public async Task Invoke(HttpContext context,
+                IRequestLoggerService requestLoggerService)
         {
             var requestLog = new RequestLog()
             {
@@ -27,7 +27,6 @@ namespace Easy_Request_log.Middleware
             };
 
             context.Request.EnableBuffering();
-            ;
             var buffer = new byte[Convert.ToInt32(context.Request.ContentLength)];
             await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
             var bodyAsText = Encoding.UTF8.GetString(buffer);

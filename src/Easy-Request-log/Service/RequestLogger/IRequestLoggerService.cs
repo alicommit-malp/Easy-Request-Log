@@ -9,6 +9,7 @@ namespace Easy_Request_log.Service.RequestLogger
     public interface IRequestLoggerService
     {
         IEnumerable<RequestLog> Find(Expression<Func<RequestLog, bool>> predicate, int limit=1000);
-         void Log(RequestLog requestLog);
+        IEnumerable<RequestLog> Find(int limit=1000);
+        void Log(RequestLog requestLog);
     }
 }

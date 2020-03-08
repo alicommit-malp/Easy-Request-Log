@@ -21,7 +21,7 @@ namespace demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddRequestLogger(maxLogCount:10);
+            services.AddRequestLogger(maxLogCount:3);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

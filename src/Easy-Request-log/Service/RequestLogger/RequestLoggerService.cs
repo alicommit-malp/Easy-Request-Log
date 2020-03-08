@@ -31,6 +31,12 @@ namespace Easy_Request_log.Service.RequestLogger
             dbContext.SaveChanges();
         }
 
+
+        public IEnumerable<RequestLog> Find(int limit = 1000)
+        {
+            return dbContext.RequestLogs.OrderByDescending(z => z.Datetime).Take(limit).ToList();
+        }
+
         public IEnumerable<RequestLog> Find(Expression<Func<RequestLog, bool>> predicate, int limit = 1000)
         {
             foreach (var requestLog in dbContext.RequestLogs.Where(predicate).Take(limit))
