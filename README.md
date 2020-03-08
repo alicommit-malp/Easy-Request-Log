@@ -82,7 +82,35 @@ by using the DI you can access the RequestLoggerService which is being registere
 behind the sence and is ready to be used and the result will be like this
 
 ```json
-[{"id":"88360c6e-cf8b-483d-95c3-5e4a3a397286","datetime":"2020-03-08T17:03:09.513447","username":null,"path":"/log","queryString":"","body":"","statusCode":200},{"id":"8bdbfe96-95f8-436a-a8ce-b03feea53481","datetime":"2020-03-08T17:03:09.327419","username":null,"path":"/log","queryString":"","body":"","statusCode":200},{"id":"cdb2f9ac-31e5-412a-ac33-501255ba5de3","datetime":"2020-03-08T17:03:09.138145","username":null,"path":"/log","queryString":"","body":"","statusCode":200}]
+[
+  {
+    "id": "88360c6e-cf8b-483d-95c3-5e4a3a397286",
+    "datetime": "2020-03-08T17:03:09.513447",
+    "username": null,
+    "path": "/log",
+    "queryString": "",
+    "body": "",
+    "statusCode": 200
+  },
+  {
+    "id": "8bdbfe96-95f8-436a-a8ce-b03feea53481",
+    "datetime": "2020-03-08T17:03:09.327419",
+    "username": null,
+    "path": "/log",
+    "queryString": "",
+    "body": "",
+    "statusCode": 200
+  },
+  {
+    "id": "cdb2f9ac-31e5-412a-ac33-501255ba5de3",
+    "datetime": "2020-03-08T17:03:09.138145",
+    "username": null,
+    "path": "/log",
+    "queryString": "",
+    "body": "",
+    "statusCode": 200
+  }
+]
 
 ```
 
