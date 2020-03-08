@@ -27,7 +27,6 @@ public void ConfigeServices(IServiceCollection services)
 public void Confige(IApplicationBuilder app, IWebHostEnvironment env)
 {
     ...
-    app.UseAuthorization();
     app.UseRequestLogger();
     ...
 }
