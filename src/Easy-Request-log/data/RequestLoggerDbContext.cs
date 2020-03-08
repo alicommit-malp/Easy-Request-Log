@@ -9,8 +9,7 @@ namespace Easy_Request_log.data
     {
         public DbSet<RequestLog> RequestLogs { get; set; }
 
-        public RequestLoggerDbContext()
-        {
+        public RequestLoggerDbContext(DbContextOptions<RequestLoggerDbContext> options):base(options){
             Database.EnsureCreated();
         }
 
