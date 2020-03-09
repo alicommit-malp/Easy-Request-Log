@@ -1,11 +1,6 @@
 # Easy Request Log in .Net Core
 
-After finishing up your [Asp.Net Core]("https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1") project weather if it is a MVC or an API project,
-you may want to monitor all the requests which are being received by your endpoints.
-You can obviously log them in a file, however log files are unstructured and messy
-for instance to see which endpoint are being called the most or which user has requested which
-resources is pretty hard. With this in mind I have designed a Nuget library in order to provide a request
-logging functionality in just 2 lines of code called Easy-Request-Log.
+After finishing up your [Asp.Net Core]("https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1") project weather if it is a MVC or an API project, you may want to monitor all the requests which are being received by your endpoints. You can obviously log them in a file, however log files are unstructured and messy for instance to see which endpoint are being called the most or which user has requested which resources is pretty hard. With this in mind I have designed a Nuget library in order to provide a request logging functionality in just 2 lines of code called Easy-Request-Log.
 
 ## Usage
 
@@ -36,12 +31,7 @@ public void Confige(IApplicationBuilder app, IWebHostEnvironment env)
 
 ```
 
-And that's it, the easy-request-log will make a sqlite database and add
-each incoming request to the database, the database has a limit of 10,000
-records by default which you can change it in the ConfigureService method by passing
-the maxLogCount parameter, as it can be seen in the example above the maxLogCount
-has been set to 3 for the sake of the demo which means that the easy-request-log will keep only the last 3
-records in the database on 4th request, the oldest request will be removed from the database.
+And that's it, the easy-request-log will make a sqlite database and add each incoming request to the database, the database has a limit of 10,000 records by default which you can change it in the ConfigureService method by passing the maxLogCount parameter, as it can be seen in the example above the maxLogCount has been set to 3 for the sake of the demo which means that the easy-request-log will keep only the last 3 records in the database on 4th request, the oldest request will be removed from the database.
 
 ## Querying the logs
 
@@ -69,9 +59,7 @@ public class LogController : ControllerBase
 }
 ```
 
-by using the Dependency Injection you can access the RequestLoggerService which is being registered
-behind the scene with Scooped lifetime.
-
+by using the Dependency Injection you can access the RequestLoggerService which is being registered behind the scene with Scooped lifetime.
 The result of hitting the http://your_ip/log will be like this:
 
 ```json
