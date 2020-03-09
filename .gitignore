@@ -228,6 +228,8 @@ _Pvt_Extensions
 
 # Paket dependency manager
 .paket/paket.exe
+asdasd
+
 
 # FAKE - F# Make
 .fake/
