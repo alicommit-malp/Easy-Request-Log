@@ -1,6 +1,6 @@
 # Easy Request Log in .Net Core
 
-After finishing up your [Asp.Net Core]("") project weather if it is a MVC or an API project,
+After finishing up your [Asp.Net Core]("https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1") project weather if it is a MVC or an API project,
 you may want to monitor all the requests which are being received by your endpoints.
 You can obviously log them in a file, however log files are unstructured and messy
 for instance to see which endpoint are being called the most or which user has requested which
@@ -9,8 +9,8 @@ logging functionality in just 2 lines of code called Easy-Request-Log.
 
 ## Usage
 
-Install it from [Nuget Package](https://www.nuget.org/packages/Easy-Request-log/1.0.0)
-Project Source code is [here](https://github.com/alicommit-malp/Easy-Request-Log)
+>Install it from [Nuget.org](https://www.nuget.org/packages/Easy-Request-log/1.0.0)
+>View the project source code on [Github.com](https://github.com/alicommit-malp/Easy-Request-Log)
 
 ```bash
 dotnet add package easy-request-log
@@ -107,7 +107,7 @@ The result of hitting the http://your_ip/log will be like this:
 
 ```
 
-Install it from [Nuget Package](https://www.nuget.org/packages/Easy-Request-log/1.0.0)
-Project Source code is [here](https://github.com/alicommit-malp/Easy-Request-Log)
+>Install it from [Nuget.org](https://www.nuget.org/packages/Easy-Request-log/1.0.0)
+>View the project source code on [Github.com](https://github.com/alicommit-malp/Easy-Request-Log)
 
 Happy Coding :)
