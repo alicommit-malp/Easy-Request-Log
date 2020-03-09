@@ -42,11 +42,9 @@ And that's it, the easy-request-log will make a sqlite database and add each inc
 public class LogController : ControllerBase
 {
     private readonly IRequestLoggerService _requestLoggerService;
-    private readonly ILogger<LogController> _logger;
 
-    public LogController(ILogger<LogController> logger,IRequestLoggerService requestLoggerService)
+    public LogController(IRequestLoggerService requestLoggerService)
     {
-        _logger = logger;
         _requestLoggerService= requestLoggerService;
     }
 
