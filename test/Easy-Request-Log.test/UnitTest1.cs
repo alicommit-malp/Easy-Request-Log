@@ -1,3 +1,12 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Easy_Request_log.Middleware;
+using Easy_Request_log.Service.RequestLogger;
+using Microsoft.AspNetCore.Http;
+using Moq;
 using NUnit.Framework;
 
 namespace Easy_Request_Log.test
@@ -10,8 +19,32 @@ namespace Easy_Request_Log.test
         }
 
         [Test]
-        public void Test1()
+        public async Task Test1()
         {
+            
+            var requestLoggerService = new Mock<IRequestLoggerService>();
+            
+            
+            var requestMock = new Mock<HttpRequest>();
+            requestMock.Setup(x => x.Scheme).Returns("http");
+            requestMock.Setup(x => x.Host).Returns(new HostString("localhost"));
+            requestMock.Setup(x => x.Path).Returns(new PathString("/test"));
+            requestMock.Setup(x => x.PathBase).Returns(new PathString("/"));
+            requestMock.Setup(x => x.Method).Returns("GET");
+            requestMock.Setup(x => x.Body).Returns(new MemoryStream());
+            requestMock.Setup(x => x.QueryString).Returns(new QueryString("?param1=2"));            
+            
+            
+            var contextMock = new Mock<HttpContext>();
+            contextMock.Setup(x => x.Request).Returns(requestMock.Object);
+            // new ClaimsPrincipal().
+            // contextMock.Setup(z => z.User).Returns();
+
+            var requestLoggerMiddleware = new RequestLoggerMiddleware(next: (innerHttpContext) => Task.FromResult(0));
+
+
+            await requestLoggerMiddleware.Invoke(contextMock.Object,requestLoggerService.Object);
+            
             Assert.Pass();
         }
     }
