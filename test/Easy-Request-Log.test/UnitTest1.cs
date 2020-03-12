@@ -1,7 +1,9 @@
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using Easy_Request_log.data;
 using Easy_Request_log.Middleware;
 using Easy_Request_log.Service.RequestLogger;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +24,6 @@ namespace Easy_Request_Log.test
         public async Task Test1()
         {
             var requestLoggerService = new Mock<IRequestLoggerService>();
-
 
             var requestMock = new Mock<HttpRequest>();
             requestMock.Setup(x => x.Scheme).Returns("http");

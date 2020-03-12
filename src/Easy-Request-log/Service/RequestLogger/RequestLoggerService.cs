@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Easy_Request_log.data;
 using Easy_Request_log.data.entity;
 using Easy_Request_log.Extension.Service;
@@ -31,18 +28,9 @@ namespace Easy_Request_log.Service.RequestLogger
             _dbContext.SaveChanges();
         }
 
-
-        public IEnumerable<RequestLog> Find(int limit = 1000)
+        public IQueryable<RequestLog> Find(int limit = 1000)
         {
-            return _dbContext.RequestLogs.OrderByDescending(z => z.Datetime).Take(limit).ToList();
-        }
-
-        public IEnumerable<RequestLog> Find(Expression<Func<RequestLog, bool>> predicate, int limit = 1000)
-        {
-            foreach (var requestLog in _dbContext.RequestLogs.Where(predicate).Take(limit))
-            {
-                yield return requestLog;
-            }
+            return _dbContext.RequestLogs.AsQueryable().Take(limit);
         }
     }
 }
