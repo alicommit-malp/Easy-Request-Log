@@ -1,15 +1,12 @@
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using Easy_Request_log.data;
 using Easy_Request_log.Middleware;
 using Easy_Request_log.Service.RequestLogger;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using NUnit.Framework;
-using static Microsoft.AspNetCore.Http.HttpResponse;
 
 namespace Easy_Request_Log.test
 {
@@ -42,8 +39,8 @@ namespace Easy_Request_Log.test
             var principal = new GenericPrincipal(fakeIdentity, null);
             contextMock.Setup(t => t.User).Returns(principal);
             var response = new Mock<HttpResponse>();
-            
-            response.Setup(z => z.StatusCode).Returns((int)HttpStatusCode.OK);
+
+            response.Setup(z => z.StatusCode).Returns((int) HttpStatusCode.OK);
             contextMock.Setup(z => z.Response).Returns(response.Object);
 
             var requestLoggerMiddleware = new RequestLoggerMiddleware(next: (innerHttpContext) => Task.FromResult(0));

@@ -8,5 +8,9 @@
     <ProjectReference Include="..\src\Easy-Request-log\Easy-Request-log.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="db" />
+  </ItemGroup>
+
 
 </Project>

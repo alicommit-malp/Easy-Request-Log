@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Easy_Request_log.data.entity;
+using Easy_Request_log.Extension.Service;
 using Easy_Request_log.Service.RequestLogger;
 using Microsoft.AspNetCore.Http;
 
@@ -41,7 +43,18 @@ namespace Easy_Request_log.Middleware
 
             requestLog.StatusCode = (HttpStatusCode) context.Response.StatusCode;
 
-            requestLoggerService.Log(requestLog);
+            await requestLoggerService.Add(requestLog);
+            PreventOverGrowth(requestLoggerService);
+        }
+
+        private static void PreventOverGrowth(IRequestLoggerService requestLoggerService)
+        {
+            if (requestLoggerService.Find().Count() < RequestLoggerServiceExtension.MaxLogCount) return;
+            var last = requestLoggerService.Find().OrderBy(z => z.Datetime).FirstOrDefault();
+            if (last != null)
+            {
+                requestLoggerService.Remove(last);
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Easy_Request_log.data;
 using Easy_Request_log.data.entity;
-using Easy_Request_log.Extension.Service;
 
 namespace Easy_Request_log.Service.RequestLogger
 {
@@ -11,26 +11,24 @@ namespace Easy_Request_log.Service.RequestLogger
 
         public RequestLoggerService(RequestLoggerDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
-        public void Log(RequestLog requestLog)
+        public async Task Add(RequestLog requestLog)
         {
-            var count = _dbContext.RequestLogs.Count();
-            if (count >= RequestLoggerServiceExtension.MaxLogCount)
-            {
-                var last = _dbContext.RequestLogs.OrderBy(p => p.Datetime).FirstOrDefault();
-                if (last != null)
-                    _dbContext.Remove(last);
-            }
-
-            _dbContext.Add(requestLog);
-            _dbContext.SaveChanges();
+            await _dbContext.AddAsync(requestLog);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<RequestLog> Find(int limit = 1000)
+        public async Task Remove(RequestLog requestLog)
         {
-            return _dbContext.RequestLogs.AsQueryable().Take(limit);
+            _dbContext.Remove(requestLog);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public IQueryable<RequestLog> Find()
+        {
+            return _dbContext.RequestLogs.AsQueryable();
         }
     }
 }

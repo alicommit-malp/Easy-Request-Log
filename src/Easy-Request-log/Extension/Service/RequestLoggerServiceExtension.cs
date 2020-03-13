@@ -17,7 +17,7 @@ namespace Easy_Request_log.Extension.Service
 
             MaxLogCount = maxLogCount;
             services.AddDbContext<RequestLoggerDbContext>(options => { options.UseSqlite(sqliteConnectionString); });
-            services.AddScoped<IRequestLoggerService, RequestLoggerService>();
+            services.AddTransient<IRequestLoggerService, RequestLoggerService>();
             return services;
         }
     }
